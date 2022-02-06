@@ -26,8 +26,10 @@ class _$AuthStateTearOff {
     return const Authenticated();
   }
 
-  Unauthenticated unauthenticated() {
-    return const Unauthenticated();
+  Unauthenticated unauthenticated({String? email}) {
+    return Unauthenticated(
+      email: email,
+    );
   }
 
   Failure failure(AuthFailure failure) {
@@ -46,7 +48,7 @@ mixin _$AuthState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() authenticated,
-    required TResult Function() unauthenticated,
+    required TResult Function(String? email) unauthenticated,
     required TResult Function(AuthFailure failure) failure,
   }) =>
       throw _privateConstructorUsedError;
@@ -54,7 +56,7 @@ mixin _$AuthState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? authenticated,
-    TResult Function()? unauthenticated,
+    TResult Function(String? email)? unauthenticated,
     TResult Function(AuthFailure failure)? failure,
   }) =>
       throw _privateConstructorUsedError;
@@ -62,7 +64,7 @@ mixin _$AuthState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? authenticated,
-    TResult Function()? unauthenticated,
+    TResult Function(String? email)? unauthenticated,
     TResult Function(AuthFailure failure)? failure,
     required TResult orElse(),
   }) =>
@@ -149,7 +151,7 @@ class _$Initial extends Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() authenticated,
-    required TResult Function() unauthenticated,
+    required TResult Function(String? email) unauthenticated,
     required TResult Function(AuthFailure failure) failure,
   }) {
     return initial();
@@ -160,7 +162,7 @@ class _$Initial extends Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? authenticated,
-    TResult Function()? unauthenticated,
+    TResult Function(String? email)? unauthenticated,
     TResult Function(AuthFailure failure)? failure,
   }) {
     return initial?.call();
@@ -171,7 +173,7 @@ class _$Initial extends Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? authenticated,
-    TResult Function()? unauthenticated,
+    TResult Function(String? email)? unauthenticated,
     TResult Function(AuthFailure failure)? failure,
     required TResult orElse(),
   }) {
@@ -266,7 +268,7 @@ class _$Authenticated extends Authenticated {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() authenticated,
-    required TResult Function() unauthenticated,
+    required TResult Function(String? email) unauthenticated,
     required TResult Function(AuthFailure failure) failure,
   }) {
     return authenticated();
@@ -277,7 +279,7 @@ class _$Authenticated extends Authenticated {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? authenticated,
-    TResult Function()? unauthenticated,
+    TResult Function(String? email)? unauthenticated,
     TResult Function(AuthFailure failure)? failure,
   }) {
     return authenticated?.call();
@@ -288,7 +290,7 @@ class _$Authenticated extends Authenticated {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? authenticated,
-    TResult Function()? unauthenticated,
+    TResult Function(String? email)? unauthenticated,
     TResult Function(AuthFailure failure)? failure,
     required TResult orElse(),
   }) {
@@ -346,6 +348,7 @@ abstract class $UnauthenticatedCopyWith<$Res> {
   factory $UnauthenticatedCopyWith(
           Unauthenticated value, $Res Function(Unauthenticated) then) =
       _$UnauthenticatedCopyWithImpl<$Res>;
+  $Res call({String? email});
 }
 
 /// @nodoc
@@ -357,36 +360,59 @@ class _$UnauthenticatedCopyWithImpl<$Res> extends _$AuthStateCopyWithImpl<$Res>
 
   @override
   Unauthenticated get _value => super._value as Unauthenticated;
+
+  @override
+  $Res call({
+    Object? email = freezed,
+  }) {
+    return _then(Unauthenticated(
+      email: email == freezed
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$Unauthenticated extends Unauthenticated {
-  const _$Unauthenticated() : super._();
+  const _$Unauthenticated({this.email}) : super._();
+
+  @override
+  final String? email;
 
   @override
   String toString() {
-    return 'AuthState.unauthenticated()';
+    return 'AuthState.unauthenticated(email: $email)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is Unauthenticated);
+        (other.runtimeType == runtimeType &&
+            other is Unauthenticated &&
+            const DeepCollectionEquality().equals(other.email, email));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(email));
+
+  @JsonKey(ignore: true)
+  @override
+  $UnauthenticatedCopyWith<Unauthenticated> get copyWith =>
+      _$UnauthenticatedCopyWithImpl<Unauthenticated>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() authenticated,
-    required TResult Function() unauthenticated,
+    required TResult Function(String? email) unauthenticated,
     required TResult Function(AuthFailure failure) failure,
   }) {
-    return unauthenticated();
+    return unauthenticated(email);
   }
 
   @override
@@ -394,10 +420,10 @@ class _$Unauthenticated extends Unauthenticated {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? authenticated,
-    TResult Function()? unauthenticated,
+    TResult Function(String? email)? unauthenticated,
     TResult Function(AuthFailure failure)? failure,
   }) {
-    return unauthenticated?.call();
+    return unauthenticated?.call(email);
   }
 
   @override
@@ -405,12 +431,12 @@ class _$Unauthenticated extends Unauthenticated {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? authenticated,
-    TResult Function()? unauthenticated,
+    TResult Function(String? email)? unauthenticated,
     TResult Function(AuthFailure failure)? failure,
     required TResult orElse(),
   }) {
     if (unauthenticated != null) {
-      return unauthenticated();
+      return unauthenticated(email);
     }
     return orElse();
   }
@@ -454,8 +480,13 @@ class _$Unauthenticated extends Unauthenticated {
 }
 
 abstract class Unauthenticated extends AuthState {
-  const factory Unauthenticated() = _$Unauthenticated;
+  const factory Unauthenticated({String? email}) = _$Unauthenticated;
   const Unauthenticated._() : super._();
+
+  String? get email;
+  @JsonKey(ignore: true)
+  $UnauthenticatedCopyWith<Unauthenticated> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -531,7 +562,7 @@ class _$Failure extends Failure {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() authenticated,
-    required TResult Function() unauthenticated,
+    required TResult Function(String? email) unauthenticated,
     required TResult Function(AuthFailure failure) failure,
   }) {
     return failure(this.failure);
@@ -542,7 +573,7 @@ class _$Failure extends Failure {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? authenticated,
-    TResult Function()? unauthenticated,
+    TResult Function(String? email)? unauthenticated,
     TResult Function(AuthFailure failure)? failure,
   }) {
     return failure?.call(this.failure);
@@ -553,7 +584,7 @@ class _$Failure extends Failure {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? authenticated,
-    TResult Function()? unauthenticated,
+    TResult Function(String? email)? unauthenticated,
     TResult Function(AuthFailure failure)? failure,
     required TResult orElse(),
   }) {

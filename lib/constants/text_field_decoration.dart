@@ -18,7 +18,6 @@ InputDecoration textFieldDecoration(String hintText) {
       borderRadius: BorderRadius.circular(30),
       borderSide: const BorderSide(color: Colors.red),
     ),
-    // icon: Icon(Icons.person),
     hintText: hintText,
     hintStyle: const TextStyle(color: Colors.grey),
   );

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../logic/cubit/auth_cubit.dart';
 
 class ConfirmCodePage extends StatefulWidget {
   const ConfirmCodePage({Key? key}) : super(key: key);
@@ -44,19 +47,22 @@ class _ConfirmCodePageState extends State<ConfirmCodePage> {
           const SizedBox(
             height: 30,
           ),
-          ElevatedButton(
-              onPressed: () {
-                setState(() {
-                  _otp = _fieldOne.text +
-                      _fieldTwo.text +
-                      _fieldThree.text +
-                      _fieldFour.text +
-                      _fieldFive.text +
-                      _fieldSix.text;
-                });
-                Navigator.pop(context);
-              },
-              child: const Text('Авторизоваться')),
+          BlocBuilder<AuthCubit, AuthState>(
+            builder: (context, state) {
+              return ElevatedButton(
+                  onPressed: () {
+                    _otp = _fieldOne.text +
+                        _fieldTwo.text +
+                        _fieldThree.text +
+                        _fieldFour.text +
+                        _fieldFive.text +
+                        _fieldSix.text;
+                    context.read<AuthCubit>().signInWithCode(_otp!);
+                    Navigator.pop(context);
+                  },
+                  child: const Text('Авторизоваться'));
+            },
+          ),
           const SizedBox(
             height: 30,
           ),

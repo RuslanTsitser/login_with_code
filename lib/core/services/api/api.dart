@@ -1,4 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:dio/adapter.dart';
+import 'package:login_with_code/core/services/header/header.dart';
 
 abstract class Api {
   Future<Response> getData(
@@ -18,6 +20,11 @@ abstract class Api {
 class ApiService extends Api {
   Dio dio = Dio();
 
+  ApiService() {
+    (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
+        (client) => client..badCertificateCallback = (_, __, ___) => true;
+  }
+
   @override
   Future<Response> getData(
     String uri, {
@@ -28,10 +35,10 @@ class ApiService extends Api {
       Response response = await dio.get(
         uri,
         queryParameters: queryParameters,
-        options: Options(headers: headers ?? {}),
+        options: Options(headers: headers ?? usernameAndPasswordHeader),
       );
       return response;
-    } catch (e) {
+    } on DioError {
       rethrow;
     }
   }
@@ -49,14 +56,11 @@ class ApiService extends Api {
         data: data,
         queryParameters: queryParameters,
         options: Options(
-            headers: headers ?? {},
-            followRedirects: false,
-            validateStatus: (status) {
-              return status! < 500;
-            }),
+          headers: headers ?? usernameAndPasswordHeader,
+        ),
       );
       return response;
-    } on DioError catch (e) {
+    } on DioError {
       rethrow;
     }
   }

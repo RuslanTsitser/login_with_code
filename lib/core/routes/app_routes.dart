@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:login_with_code/features/auth/presentation/confirm_code_page.dart';
-import 'package:login_with_code/features/auth/presentation/register_page.dart';
-import 'package:login_with_code/features/profile/presentation/user_page.dart';
+
+import '../../features/profile/auth/presentation/confirm_code_page.dart';
+import '../../features/profile/auth/presentation/register_page.dart';
+import '../../features/profile/update/presentation/user_page.dart';
 
 class AppRoutes {
   static Map<String, WidgetBuilder> routes = {
-    AppRoute.register.value: (context) => RegisterPage(),
-    AppRoute.confirmCode.value: (context) => ConfirmCodePage(),
+    AppRoute.register.value: (context) => const RegisterPage(),
+    AppRoute.confirmCode.value: (context) => const ConfirmCodePage(),
     AppRoute.userPage.value: (context) => UserPage(),
   };
 }

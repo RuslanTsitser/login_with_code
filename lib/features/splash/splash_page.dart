@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:login_with_code/features/auth/logic/cubit/auth_cubit.dart';
-import 'package:login_with_code/features/auth/presentation/register_page.dart';
-import 'package:login_with_code/features/profile/presentation/user_page.dart';
+
+import '../profile/auth/logic/cubit/auth_cubit.dart';
+import '../profile/auth/presentation/register_page.dart';
+import '../profile/update/presentation/user_page.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -23,21 +24,12 @@ class _SplashPageState extends State<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AuthCubit, AuthState>(
-      listener: (context, state) {
-        if (state is Failure) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text('Failure ${state.failure.toString()}'),
-            ),
-          );
-        }
-      },
+    return BlocBuilder<AuthCubit, AuthState>(
       builder: (context, state) {
         if (state is Authenticated) {
           return UserPage();
         }
-        if (state is Unauthenticated) {
+        if (state is Unauthenticated || state is Failure) {
           return const RegisterPage();
         }
         return Scaffold(

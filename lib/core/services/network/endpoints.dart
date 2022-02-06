@@ -30,6 +30,6 @@ extension EndpointsExtension on Endpoints {
     Map<String, dynamic>? queryParameters,
     List<String>? urlParams,
   }) {
-    return Uri.https(hostName, getPath(urlParams), queryParameters).toString();
+    return Uri.http(hostName, getPath(urlParams), queryParameters).toString();
   }
 }

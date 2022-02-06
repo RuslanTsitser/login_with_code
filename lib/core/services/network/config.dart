@@ -12,7 +12,7 @@ extension ConfigExtension on Config {
     }
   }
 
-  static String buldURLHead() {
+  static String buildURLHead() {
     return Config.baseScheme.value + "://" + Config.baseUrl.value + "/";
   }
 }
