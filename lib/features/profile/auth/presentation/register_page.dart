@@ -15,6 +15,7 @@ class RegisterPage extends StatelessWidget {
 
     Widget _usernameField() {
       return TextFormField(
+        keyboardType: TextInputType.emailAddress,
         style: const TextStyle(color: Colors.black),
         controller: _controller,
         decoration: textFieldDecoration('Введите email', _controller),

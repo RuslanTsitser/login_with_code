@@ -58,11 +58,6 @@ class UserPage extends StatelessWidget {
           child: BlocBuilder<UpdateUserCubit, UpdateUserState>(
             buildWhen: (previous, current) => current is UpdatedUser,
             builder: (context, state) {
-              state.maybeMap(
-                  orElse: () {},
-                  updatedUser: (value) {
-                    value.name ?? 'unknown';
-                  });
               return ListView(
                 children: [
                   Row(
@@ -87,49 +82,51 @@ class UserPage extends StatelessWidget {
                   Text(
                     'Имя ' +
                         state.maybeMap(
-                            orElse: () => 'unknown',
-                            updatedUser: (value) => value.name ?? 'unknown'),
+                            orElse: () => '',
+                            updatedUser: (value) => value.name ?? ''),
                     style: Theme.of(context).textTheme.headline6,
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 10),
                   TextFormField(
+                    keyboardType: TextInputType.name,
                     style: const TextStyle(color: Colors.black),
                     controller: _nameController,
                     decoration: textFieldDecoration(
-                        'Введите имя, например, Иван', _nameController),
+                        'Введите новое имя', _nameController),
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 30),
                   Text(
                     'Email ' +
                         state.maybeMap(
-                            orElse: () => 'unknown',
-                            updatedUser: (value) => value.email ?? 'unknown'),
+                            orElse: () => '',
+                            updatedUser: (value) => value.email ?? ''),
                     style: Theme.of(context).textTheme.headline6,
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 10),
                   TextFormField(
+                    keyboardType: TextInputType.emailAddress,
                     style: const TextStyle(color: Colors.black),
                     controller: _emailController,
                     decoration: textFieldDecoration(
-                        'Введите email, например, ivan@gmail.com',
-                        _emailController),
+                        'Введите новый email', _emailController),
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 30),
                   Text(
-                    'Phone ' +
+                    'Тел. ' +
                         state.maybeMap(
-                            orElse: () => 'unknown',
-                            updatedUser: (value) => value.phone ?? 'unknown'),
+                            orElse: () => '',
+                            updatedUser: (value) => value.phone ?? ''),
                     style: Theme.of(context).textTheme.headline6,
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 10),
                   TextFormField(
+                    keyboardType: TextInputType.phone,
                     style: const TextStyle(color: Colors.black),
                     controller: _phoneController,
                     decoration: textFieldDecoration(
                         'Введите новый номер телефона', _phoneController),
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 30),
                   _loginButton(),
                 ],
               );

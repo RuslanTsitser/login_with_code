@@ -57,8 +57,18 @@ class _ConfirmCodePageState extends State<ConfirmCodePage> {
                         _fieldFour.text +
                         _fieldFive.text +
                         _fieldSix.text;
-                    context.read<AuthCubit>().signInWithCode(_otp!);
-                    Navigator.pop(context);
+                    if (_fieldOne.text.isNotEmpty &&
+                        _fieldTwo.text.isNotEmpty &&
+                        _fieldThree.text.isNotEmpty &&
+                        _fieldFour.text.isNotEmpty &&
+                        _fieldFive.text.isNotEmpty &&
+                        _fieldSix.text.isNotEmpty) {
+                      context.read<AuthCubit>().signInWithCode(_otp!);
+                      Navigator.pop(context);
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Ошибка, введите код')));
+                    }
                   },
                   child: const Text('Авторизоваться'));
             },
