@@ -95,8 +95,8 @@ class UserPage extends StatelessWidget {
                   TextFormField(
                     style: const TextStyle(color: Colors.black),
                     controller: _nameController,
-                    decoration:
-                        textFieldDecoration('Введите имя, например, Иван'),
+                    decoration: textFieldDecoration(
+                        'Введите имя, например, Иван', _nameController),
                   ),
                   const SizedBox(height: 20),
                   Text(
@@ -111,7 +111,8 @@ class UserPage extends StatelessWidget {
                     style: const TextStyle(color: Colors.black),
                     controller: _emailController,
                     decoration: textFieldDecoration(
-                        'Введите email, например, ivan@gmail.com'),
+                        'Введите email, например, ivan@gmail.com',
+                        _emailController),
                   ),
                   const SizedBox(height: 20),
                   Text(
@@ -125,8 +126,8 @@ class UserPage extends StatelessWidget {
                   TextFormField(
                     style: const TextStyle(color: Colors.black),
                     controller: _phoneController,
-                    decoration:
-                        textFieldDecoration('Введите новый номер телефона'),
+                    decoration: textFieldDecoration(
+                        'Введите новый номер телефона', _phoneController),
                   ),
                   const SizedBox(height: 20),
                   _loginButton(),

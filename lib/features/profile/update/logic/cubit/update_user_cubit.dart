@@ -22,6 +22,7 @@ class UpdateUserCubit extends Cubit<UpdateUserState> {
         ));
 
   void updateUser({String? name, String? phone, String? email}) async {
+    emit(const Loading());
     final token = await _secureCredentialsStorage.read();
     if (token != null) {
       try {

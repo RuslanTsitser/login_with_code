@@ -17,7 +17,7 @@ class RegisterPage extends StatelessWidget {
       return TextFormField(
         style: const TextStyle(color: Colors.black),
         controller: _controller,
-        decoration: textFieldDecoration('Введите email'),
+        decoration: textFieldDecoration('Введите email', _controller),
       );
     }
 
@@ -28,12 +28,15 @@ class RegisterPage extends StatelessWidget {
             Navigator.of(context).pushNamed(AppRoute.confirmCode.value);
             return null;
           },
+          loading: (_) {
+            return null;
+          },
           authenticated: (_) {
             return null;
           },
           failure: (value) {
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                content: Text(value.failure.map(
+                content: Text(value.failure!.map(
                     server: (message) => message.message!,
                     storage: (_) => ''))));
 

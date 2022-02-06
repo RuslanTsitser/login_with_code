@@ -31,6 +31,10 @@ class _$UpdateUserStateTearOff {
       failure,
     );
   }
+
+  Loading loading() {
+    return const Loading();
+  }
 }
 
 /// @nodoc
@@ -43,18 +47,21 @@ mixin _$UpdateUserState {
     required TResult Function(String? name, String? email, String? phone)
         updatedUser,
     required TResult Function(AuthFailure failure) failure,
+    required TResult Function() loading,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String? name, String? email, String? phone)? updatedUser,
     TResult Function(AuthFailure failure)? failure,
+    TResult Function()? loading,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String? name, String? email, String? phone)? updatedUser,
     TResult Function(AuthFailure failure)? failure,
+    TResult Function()? loading,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -62,18 +69,21 @@ mixin _$UpdateUserState {
   TResult map<TResult extends Object?>({
     required TResult Function(UpdatedUser value) updatedUser,
     required TResult Function(Failure value) failure,
+    required TResult Function(Loading value) loading,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(UpdatedUser value)? updatedUser,
     TResult Function(Failure value)? failure,
+    TResult Function(Loading value)? loading,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(UpdatedUser value)? updatedUser,
     TResult Function(Failure value)? failure,
+    TResult Function(Loading value)? loading,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -183,6 +193,7 @@ class _$UpdatedUser implements UpdatedUser {
     required TResult Function(String? name, String? email, String? phone)
         updatedUser,
     required TResult Function(AuthFailure failure) failure,
+    required TResult Function() loading,
   }) {
     return updatedUser(name, email, phone);
   }
@@ -192,6 +203,7 @@ class _$UpdatedUser implements UpdatedUser {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String? name, String? email, String? phone)? updatedUser,
     TResult Function(AuthFailure failure)? failure,
+    TResult Function()? loading,
   }) {
     return updatedUser?.call(name, email, phone);
   }
@@ -201,6 +213,7 @@ class _$UpdatedUser implements UpdatedUser {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String? name, String? email, String? phone)? updatedUser,
     TResult Function(AuthFailure failure)? failure,
+    TResult Function()? loading,
     required TResult orElse(),
   }) {
     if (updatedUser != null) {
@@ -214,6 +227,7 @@ class _$UpdatedUser implements UpdatedUser {
   TResult map<TResult extends Object?>({
     required TResult Function(UpdatedUser value) updatedUser,
     required TResult Function(Failure value) failure,
+    required TResult Function(Loading value) loading,
   }) {
     return updatedUser(this);
   }
@@ -223,6 +237,7 @@ class _$UpdatedUser implements UpdatedUser {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(UpdatedUser value)? updatedUser,
     TResult Function(Failure value)? failure,
+    TResult Function(Loading value)? loading,
   }) {
     return updatedUser?.call(this);
   }
@@ -232,6 +247,7 @@ class _$UpdatedUser implements UpdatedUser {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(UpdatedUser value)? updatedUser,
     TResult Function(Failure value)? failure,
+    TResult Function(Loading value)? loading,
     required TResult orElse(),
   }) {
     if (updatedUser != null) {
@@ -327,6 +343,7 @@ class _$Failure implements Failure {
     required TResult Function(String? name, String? email, String? phone)
         updatedUser,
     required TResult Function(AuthFailure failure) failure,
+    required TResult Function() loading,
   }) {
     return failure(this.failure);
   }
@@ -336,6 +353,7 @@ class _$Failure implements Failure {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String? name, String? email, String? phone)? updatedUser,
     TResult Function(AuthFailure failure)? failure,
+    TResult Function()? loading,
   }) {
     return failure?.call(this.failure);
   }
@@ -345,6 +363,7 @@ class _$Failure implements Failure {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String? name, String? email, String? phone)? updatedUser,
     TResult Function(AuthFailure failure)? failure,
+    TResult Function()? loading,
     required TResult orElse(),
   }) {
     if (failure != null) {
@@ -358,6 +377,7 @@ class _$Failure implements Failure {
   TResult map<TResult extends Object?>({
     required TResult Function(UpdatedUser value) updatedUser,
     required TResult Function(Failure value) failure,
+    required TResult Function(Loading value) loading,
   }) {
     return failure(this);
   }
@@ -367,6 +387,7 @@ class _$Failure implements Failure {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(UpdatedUser value)? updatedUser,
     TResult Function(Failure value)? failure,
+    TResult Function(Loading value)? loading,
   }) {
     return failure?.call(this);
   }
@@ -376,6 +397,7 @@ class _$Failure implements Failure {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(UpdatedUser value)? updatedUser,
     TResult Function(Failure value)? failure,
+    TResult Function(Loading value)? loading,
     required TResult orElse(),
   }) {
     if (failure != null) {
@@ -391,4 +413,113 @@ abstract class Failure implements UpdateUserState {
   AuthFailure get failure;
   @JsonKey(ignore: true)
   $FailureCopyWith<Failure> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $LoadingCopyWith<$Res> {
+  factory $LoadingCopyWith(Loading value, $Res Function(Loading) then) =
+      _$LoadingCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$LoadingCopyWithImpl<$Res> extends _$UpdateUserStateCopyWithImpl<$Res>
+    implements $LoadingCopyWith<$Res> {
+  _$LoadingCopyWithImpl(Loading _value, $Res Function(Loading) _then)
+      : super(_value, (v) => _then(v as Loading));
+
+  @override
+  Loading get _value => super._value as Loading;
+}
+
+/// @nodoc
+
+class _$Loading implements Loading {
+  const _$Loading();
+
+  @override
+  String toString() {
+    return 'UpdateUserState.loading()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is Loading);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String? name, String? email, String? phone)
+        updatedUser,
+    required TResult Function(AuthFailure failure) failure,
+    required TResult Function() loading,
+  }) {
+    return loading();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(String? name, String? email, String? phone)? updatedUser,
+    TResult Function(AuthFailure failure)? failure,
+    TResult Function()? loading,
+  }) {
+    return loading?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String? name, String? email, String? phone)? updatedUser,
+    TResult Function(AuthFailure failure)? failure,
+    TResult Function()? loading,
+    required TResult orElse(),
+  }) {
+    if (loading != null) {
+      return loading();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(UpdatedUser value) updatedUser,
+    required TResult Function(Failure value) failure,
+    required TResult Function(Loading value) loading,
+  }) {
+    return loading(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(UpdatedUser value)? updatedUser,
+    TResult Function(Failure value)? failure,
+    TResult Function(Loading value)? loading,
+  }) {
+    return loading?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(UpdatedUser value)? updatedUser,
+    TResult Function(Failure value)? failure,
+    TResult Function(Loading value)? loading,
+    required TResult orElse(),
+  }) {
+    if (loading != null) {
+      return loading(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class Loading implements UpdateUserState {
+  const factory Loading() = _$Loading;
 }

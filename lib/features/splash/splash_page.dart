@@ -29,7 +29,7 @@ class _SplashPageState extends State<SplashPage> {
         if (state is Authenticated) {
           return UserPage();
         }
-        if (state is Unauthenticated || state is Failure) {
+        if (state is Unauthenticated || state is Failure || state is Loading) {
           return const RegisterPage();
         }
         return Scaffold(

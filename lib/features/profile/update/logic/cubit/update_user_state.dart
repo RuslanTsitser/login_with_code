@@ -8,4 +8,5 @@ class UpdateUserState with _$UpdateUserState {
     String? phone,
   }) = UpdatedUser;
   const factory UpdateUserState.failure(AuthFailure failure) = Failure;
+  const factory UpdateUserState.loading() = Loading;
 }

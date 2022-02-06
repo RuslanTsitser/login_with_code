@@ -4,7 +4,6 @@ import 'package:flutter/services.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:login_with_code/core/credentials_storage/secure_credentials_storage.dart';
 import 'package:login_with_code/core/data/datasources/data_provider.dart';
-import 'package:login_with_code/core/data/repositories/model/user.dart';
 import 'package:login_with_code/core/data/repositories/user_repository.dart';
 import 'package:login_with_code/core/errors/auth_failure.dart';
 
@@ -18,8 +17,6 @@ class AuthCubit extends Cubit<AuthState> {
   AuthCubit(this._userRepository, this._secureCredentialsStorage)
       : super(const AuthState.initial());
 
-  User? get user => _userRepository.user;
-
   void checkUser() async {
     try {
       final token = await _secureCredentialsStorage.read();
@@ -29,20 +26,22 @@ class AuthCubit extends Cubit<AuthState> {
       }
       emit(const AuthState.unauthenticated());
     } on PlatformException {
-      emit(const AuthState.failure(AuthFailure.storage()));
+      emit(const Failure().copyWith(failure: const AuthFailure.storage()));
     }
   }
 
   void requestForCode(String email) async {
+    emit(const AuthState.loading());
     try {
       await _dataProvider.requestForCode(email);
-      emit(const Unauthenticated().copyWith(email: email));
+      emit(const Unauthenticated());
     } on DioError catch (e) {
       if (e.response != null) {
         String message = e.response!.data['error']['message'];
-        emit(AuthState.failure(AuthFailure.server(message)));
+        emit(const Failure().copyWith(failure: AuthFailure.server(message)));
       } else {
-        emit(AuthState.failure(AuthFailure.server(e.message)));
+        String message = 'Ошибка сети';
+        emit(const Failure().copyWith(failure: AuthFailure.server(message)));
       }
     }
   }
@@ -57,12 +56,12 @@ class AuthCubit extends Cubit<AuthState> {
     } on DioError catch (e) {
       if (e.response != null) {
         String message = e.response!.data['error']['message'];
-        emit(AuthState.failure(AuthFailure.server(message)));
+        emit(const Failure().copyWith(failure: AuthFailure.server(message)));
       } else {
-        emit(AuthState.failure(AuthFailure.server(e.message)));
+        emit(const Failure().copyWith(failure: AuthFailure.server(e.message)));
       }
     } on PlatformException {
-      emit(const AuthState.failure(AuthFailure.storage()));
+      emit(const Failure().copyWith(failure: const AuthFailure.storage()));
     }
   }
 
@@ -75,12 +74,12 @@ class AuthCubit extends Cubit<AuthState> {
     } on DioError catch (e) {
       if (e.response != null) {
         String message = e.response!.data['error']['message'];
-        emit(AuthState.failure(AuthFailure.server(message)));
+        emit(const Failure().copyWith(failure: AuthFailure.server(message)));
       } else {
-        emit(AuthState.failure(AuthFailure.server(e.message)));
+        emit(const Failure().copyWith(failure: AuthFailure.server(e.message)));
       }
     } on PlatformException {
-      emit(const AuthState.failure(AuthFailure.storage()));
+      emit(const Failure().copyWith(failure: const AuthFailure.storage()));
     }
   }
 

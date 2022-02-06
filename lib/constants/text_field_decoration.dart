@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 
-InputDecoration textFieldDecoration(String hintText) {
+InputDecoration textFieldDecoration(
+    String hintText, TextEditingController controller) {
   return InputDecoration(
+    suffixIcon: IconButton(
+      icon: const Icon(Icons.clear),
+      onPressed: () {
+        controller.clear();
+      },
+    ),
     enabledBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(30),
       borderSide: const BorderSide(color: Colors.black),
